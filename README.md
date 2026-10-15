@@ -40,7 +40,15 @@ An **unofficial, AI-assisted** Foundry VTT module for quickly creating Vampire: 
 
 **Local build documented: v0.1.5 (2026-10-15).** Its JavaScript/JSON and mocked Foundry v14/Tokenizer 2 workflows passed automated checks, but **live Foundry and Tokenizer 2 verification is still pending**. In particular, image upload/storage, Tokenizer layers/pop-out, and actual WoD20 compendium integration have not been confirmed in the campaign world.
 
-**This GitHub repository currently contains documentation only.** The v0.1.5 source/module ZIP has not yet been published here as a release. Do not treat this README as a working install manifest or assume GitHub Releases contains an installable package until an actual release is published.
+**GitHub release v0.1.5 is published.** The repository contains the complete module source and an automated release workflow. The tagged release includes a Foundry-installable ZIP and a manifest, but live Foundry/Tokenizer 2 verification remains pending.
+
+**Install from Foundry:** Open **Setup → Add-on Modules → Install Module**, paste the following into **Manifest URL**, then click **Install**:
+
+`https://github.com/rebsiot/v20-vampire-npc-builder/releases/latest/download/module.json`
+
+The versioned [v0.1.5 release](https://github.com/rebsiot/v20-vampire-npc-builder/releases/tag/v0.1.5) also contains `v20-vampire-npc-builder.zip`. Enable this module in the world, and enable Tokenizer 2 if you want optional automatic tokens. Back up your world, module folder and artwork first. This GitHub distribution check does not constitute a live Foundry installation test.
+
+**Automatic releases:** Changes to module source or the packaging workflow trigger validation and a new GitHub Release only when `module.json` has an unused version number. An existing release tag is not overwritten.
 
 ## Third parties, support and rights
 
