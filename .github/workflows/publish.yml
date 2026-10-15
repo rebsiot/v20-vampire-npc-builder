@@ -1,0 +1,87 @@
+name: Publish Foundry module
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - module.json
+      - scripts/**
+      - styles/**
+      - templates/**
+      - .github/workflows/publish.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release source
+        uses: actions/checkout@v4
+      - name: Configure Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate module and source
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --version
+          node --check scripts/actor.js
+          node --check scripts/core.js
+          node --check scripts/fillable.js
+          node --check scripts/main.js
+          node --check scripts/portrait.js
+          node --check scripts/sheet.js
+          node --check scripts/pdf-lib.min.js
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const m = JSON.parse(fs.readFileSync('module.json','utf8'));
+          if (m.id !== 'v20-vampire-npc-builder') throw Error('Module ID mismatch');
+          if (!/^\d+\.\d+\.\d+$/.test(m.version)) throw Error('Invalid module version');
+          const repo = 'https://github.com/rebsiot/v20-vampire-npc-builder';
+          if (m.manifest !== `${repo}/releases/latest/download/module.json`) throw Error('Unexpected manifest URL');
+          if (m.download !== `${repo}/releases/latest/download/v20-vampire-npc-builder.zip`) throw Error('Unexpected download URL');
+          for (const file of [...m.esmodules, ...m.scripts, ...m.styles, 'scripts/pdf-lib-LICENSE.md', 'LICENSE.md', 'THIRD-PARTY-CONTENT.md', 'templates/editor.hbs']) {
+            if (!fs.existsSync(file)) throw Error(`Missing packaged file: ${file}`);
+          }
+          if (fs.statSync('scripts/pdf-lib.min.js').size < 400000) throw Error('PDF library is missing or truncated');
+          console.log(`Validated ${m.id} v${m.version}`);
+          NODE
+      - name: Package release and reject duplicate versions
+        id: package
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          VERSION="$(node -p "require('./module.json').version")"
+          if gh release view "v${VERSION}" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Refusing to overwrite an existing release v${VERSION}" >&2
+            exit 1
+          fi
+          mkdir -p dist
+          zip -q -r dist/v20-vampire-npc-builder.zip \
+            module.json scripts styles templates README.md LICENSE.md THIRD-PARTY-CONTENT.md \
+            RELEASE-NOTES.txt TEST-REPORT.md docs
+          cp module.json dist/module.json
+          unzip -tq dist/v20-vampire-npc-builder.zip
+          unzip -Z1 dist/v20-vampire-npc-builder.zip | grep -qx 'module.json'
+          unzip -Z1 dist/v20-vampire-npc-builder.zip | grep -qx 'scripts/pdf-lib.min.js'
+          unzip -Z1 dist/v20-vampire-npc-builder.zip | grep -qx 'scripts/pdf-lib-LICENSE.md'
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+      - name: Publish immutable versioned release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.package.outputs.version }}
+        run: |
+          set -euo pipefail
+          gh release create "v${VERSION}" \
+            dist/module.json dist/v20-vampire-npc-builder.zip \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "V20 NPC Builder v${VERSION}" \
+            --notes-file RELEASE-NOTES.txt

@@ -1,0 +1,46 @@
+V20 Vampire NPC Foundry Module v0.1.5 — 2026-10-15
+
+Added
+- Optional Portrait & Token panel in Foundry's NPC builder (Foundry FilePicker selection and upload).
+- Automatic Tokenizer 2 generation of the Prototype Token after an NPC Actor is created, using the chosen portrait.
+- Pre-creation Tokenizer 2 editor, with saved token patch and layer stack applied to the new Actor.
+- Adjust Created Token action for the most recently created Actor from the unchanged draft.
+- Separate GM-client draft portrait path persistence; cleared on New, Import, Duplicate and Load.
+
+Preserved
+- Creating NPCs with no portrait. No extra prompts or required fields.
+- Native WoD20 Actor, template, trait/Discipline, resource, sheet, PDF and JSON logic.
+- Existing V20 browser export schema version 1 and module Actor flags.
+- Existing Actors, placed Scene tokens, and GM data; no migration.
+
+Compatibility and limitations
+- Foundry V14, WoD20 >= 7.3.1. Tokenizer 2 is optional; original Tokenizer is not used.
+- When Tokenizer 2 is disabled, portrait is still applied but no token is generated.
+- Failed optional artwork operations do not roll back an otherwise valid new Actor.
+- Existing Scene tokens are not retokenized.
+- Image paths (not image bytes) live in the GM's local editor draft. Saved NPC JSON remains art-free.
+- No live Foundry/Tokenizer 2 integration test was possible in the build environment.
+
+Automated testing
+- Syntax checks and module manifest validation.
+- Headless Chromium simulated UI scenarios (image picker, automatic/manual token, no portrait, missing Tokenizer 2, token-generation failure, editor repaint and responsive layout).
+- Headless Chromium Foundry application lifecycle mock (create callbacks, UI, client draft persistence, duplicate-click guard).
+- Release archive structural and baseline regression checks.
+
+Install
+- Back up Z:\Data\modules\v20-vampire-npc-builder and the relevant world/assets.
+- Stop Foundry; replace the full module folder; restart; enable the module and optionally Tokenizer 2 in the intended world; hard refresh.
+Rollback
+- Stop Foundry and restore the v0.1.4 module directory or ZIP. Code rollback does not remove Actors or artwork created since upgrade.
+
+Prior release notes (original v0.1.4 notes retained below)
+============================================================
+V20 Vampire NPC Foundry Module v0.1.4
+
+- Resizable editor opens at 93% of available browser width, up to 1550 px.
+- Matching compact Vampire Browser layout and light/dark styling.
+- Clan Disciplines listed first, unrestricted out-of-clan selection.
+- Collapsible custom, optional and story sections.
+- Saved NPC picker instead of numeric prompt.
+- Repaint timing fix for change events.
+- Native Vampire actor builder, JSON schema and PDF functions retained.

@@ -1,0 +1,16 @@
+# Local files; never commit private Foundry user data or creator artwork.
+.env
+.env.*
+*.log
+*.sqlite
+*.db
+*.zip
+node_modules/
+.vscode/
+.idea/
+__pycache__/
+dist/
+private/
+backups/
+worlds/
+user-data/
