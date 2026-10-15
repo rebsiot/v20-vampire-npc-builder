@@ -19,6 +19,10 @@ An **unofficial, AI-assisted** Foundry VTT module for quickly creating Vampire: 
 - GM permissions to create Actors and upload artwork.
 - **Optional:** MrPrimate's **Tokenizer 2** (`tokenizer-2`) enabled in the same world. The legacy Tokenizer is not used by the v0.1.5 integration.
 
+## Open the builder in Foundry
+
+As a GM, open the **Actors** sidebar and click **Create Vampire NPC**. This opens the existing editor; it does not create an Actor until **Create Foundry Actor** is selected. The earlier blood-drop button under Token Controls was removed in v0.1.6. After upgrading, hard-refresh the Foundry client to load the latest code.
+
 ## NPC building
 
 - Fill in an NPC's identity, clan, sect, generation, Attributes, Abilities, Backgrounds, Virtues, Disciplines, and other traits using dot controls.
@@ -38,15 +42,15 @@ An **unofficial, AI-assisted** Foundry VTT module for quickly creating Vampire: 
 
 ## Current repository and testing status
 
-**Local build documented: v0.1.5 (2026-10-15).** Its JavaScript/JSON and mocked Foundry v14/Tokenizer 2 workflows passed automated checks, but **live Foundry and Tokenizer 2 verification is still pending**. In particular, image upload/storage, Tokenizer layers/pop-out, and actual WoD20 compendium integration have not been confirmed in the campaign world.
+**Latest built and published version: v0.1.6 (2026-10-15).** The user confirmed the portrait selector in v0.1.5 appeared after a hard refresh. v0.1.6 only relocates the GM launcher to the Actors sidebar; portrait/Tokenizer 2 code remains unchanged. Node and Chromium mock checks passed, but the new sidebar button and full Tokenizer 2 workflows have **not yet been verified in the live Foundry world**.
 
-**GitHub release v0.1.5 is published.** The repository contains the complete module source and an automated release workflow. The tagged release includes a Foundry-installable ZIP and a manifest, but live Foundry/Tokenizer 2 verification remains pending.
+**GitHub release v0.1.6 is published.** The repository contains the complete module source and an automated release workflow. The tagged release includes a Foundry-installable ZIP and a manifest, but live Foundry/Tokenizer 2 verification remains pending.
 
 **Install from Foundry:** Open **Setup → Add-on Modules → Install Module**, paste the following into **Manifest URL**, then click **Install**:
 
 `https://github.com/rebsiot/v20-vampire-npc-builder/releases/latest/download/module.json`
 
-The versioned [v0.1.5 release](https://github.com/rebsiot/v20-vampire-npc-builder/releases/tag/v0.1.5) also contains `v20-vampire-npc-builder.zip`. Enable this module in the world, and enable Tokenizer 2 if you want optional automatic tokens. Back up your world, module folder and artwork first. This GitHub distribution check does not constitute a live Foundry installation test.
+The versioned [v0.1.6 release](https://github.com/rebsiot/v20-vampire-npc-builder/releases/tag/v0.1.6) also contains `v20-vampire-npc-builder.zip`. Enable this module in the world, and enable Tokenizer 2 if you want optional automatic tokens. Back up your world, module folder and artwork first. This GitHub distribution check does not constitute a live Foundry installation test.
 
 **Automatic releases:** Changes to module source or the packaging workflow trigger validation and a new GitHub Release only when `module.json` has an unused version number. An existing release tag is not overwritten.
 

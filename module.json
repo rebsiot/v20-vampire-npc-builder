@@ -2,7 +2,7 @@
   "id": "v20-vampire-npc-builder",
   "title": "V20 Quick Vampire NPC Builder",
   "description": "GM-only V20 NPC dot editor with native WoD20 Actor creation, browser JSON import, optional portraits, and Tokenizer 2 token generation.",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "authors": [
     {
       "name": "Rick"

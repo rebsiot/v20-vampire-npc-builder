@@ -88,3 +88,7 @@ body.theme-light .v20-field input,body.theme-light .v20-field select,body.theme-
 .v20-portrait-token-preview{display:block;object-fit:contain;width:72px;height:72px;margin-top:9px;border:1px solid var(--v20-line);border-radius:7px}
 @media(max-width:600px){.v20-portrait-content{flex-direction:column}.v20-portrait-preview{width:95px;height:95px;flex-basis:95px}}
 @media print{.v20-portrait-panel{display:none!important}}
+
+/* v0.1.6 — unobtrusive GM-only NPC creation action in the Actors sidebar. */
+.v20-npc-directory-launcher { display:flex; align-items:center; justify-content:center; gap:0.4rem; box-sizing:border-box; width:100%; min-height:2rem; margin:0.3rem 0 0; cursor:pointer; }
+.v20-npc-directory-launcher i { flex-shrink:0; }

@@ -1,3 +1,31 @@
+V20 Quick Vampire NPC Builder v0.1.6 - 2026-10-15
+
+Changed:
+- GM-only Create Vampire NPC launcher added to the Actors sidebar directory; obsolete Token Controls blood-drop launcher removed.
+- The earlier missing portrait section was resolved by a client hard-refresh; portrait/Tokenizer code is unchanged.
+
+Preserved:
+- Native Vampire Actor creation, user-input dots, Disciplines, Backgrounds, JSON blueprint v1, and PDF features.
+- Optional portrait/Tokenizer 2 integration; NPC creation works without artwork or Tokenizer 2.
+- Existing Actors, world data, Scene tokens and portraits; no migrations or overwrites.
+
+Known limitations:
+- A missing portrait panel in v0.1.5 was resolved by a hard refresh in the user's live world; no code changes were required.
+- Tokenizer 2 and WoD20 integration not verified in the user's live Foundry v14 world.
+- Requires Foundry v14, WoD20 worldofdarkness >=7.3.1; Tokenizer 2 optional.
+
+Upgrade and rollback:
+- Back up Foundry world, old module folder and portrait/token assets before updating. Update from the published manifest, then restart/reload/hard-refresh. Confirm v0.1.6 in Manage Modules.
+- Roll back module code by restoring the prior module version; Actor and image data are not automatically undone.
+
+Tests:
+- JavaScript syntax, manifest, packaging, automated simulated-sidebar tests (not live Foundry). See TEST-REPORT.md.
+
+Legal:
+- Unofficial AI-assisted, experimental, proprietary personal non-commercial software. Provided as-is without warranty or promised support. Third-party IP remains with its owners. See LICENSE.md and THIRD-PARTY-CONTENT.md.
+
+--- Earlier release notes ---
+
 V20 Vampire NPC Foundry Module v0.1.5 — 2026-10-15
 
 Added

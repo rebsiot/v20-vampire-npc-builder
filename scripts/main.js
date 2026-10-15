@@ -67,13 +67,37 @@ function openEditor(initial=null,portraitPath=null){
  active=new VampireNPCEditor(initial,{position:{width:Math.min(1550,Math.floor(window.innerWidth*0.93)),height:Math.min(900,Math.floor(window.innerHeight*0.88))},portraitPath});
  active.render(true);return active;
 }
-Hooks.on('getSceneControlButtons',controls=>{if(game.system.id!=='worldofdarkness'||!game.user.isGM||!controls.tokens?.tools)return;const tools=controls.tokens.tools,orders=Object.values(tools).map(t=>t.order).filter(Number.isFinite);tools.v20VampireNPC={name:'v20VampireNPC',title:'Quick Vampire NPC',icon:'fa-solid fa-droplet',order:Math.max(-1,...orders)+1,button:true,visible:true,onChange:()=>openEditor()};});
+// Create Vampire NPC belongs with Actors, not map token controls.
+// The render hook runs for both main/sidebar and popout directory instances.
+function mountActorDirectoryLauncher(app, html) {
+ if(game.system.id!=='worldofdarkness'||!game.user.isGM)return;
+ const root=app?.element?.querySelector?app.element:html?.querySelector?html:html?.[0];
+ if(!root?.querySelector)return;
+ const header=root.querySelector('.directory-header');
+ if(!header||header.querySelector('[data-v20-npc-launcher]'))return;
+ const button=document.createElement('button');
+ button.type='button';
+ button.className='v20-npc-directory-launcher';
+ button.dataset.v20NpcLauncher='';
+ button.title='Open the Vampire NPC Builder';
+ const icon=document.createElement('i');
+ icon.className='fa-solid fa-droplet';
+ icon.setAttribute('aria-hidden','true');
+ const label=document.createElement('span');
+ label.textContent='Create Vampire NPC';
+ button.append(icon,label);
+ button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();openEditor();});
+ // Keep native Create Actor/Create Folder controls intact; this is a separate row.
+ header.append(button);
+}
+Hooks.on('renderActorDirectory',mountActorDirectoryLauncher);
 Hooks.once('init',()=>{
  game.settings.register(ID,'draft',{scope:'client',config:false,type:Object,default:{}});
  game.settings.register(ID,'savedNPCs',{scope:'client',config:false,type:Array,default:[]});
  game.settings.register(ID,'draftPortrait',{scope:'client',config:false,type:Object,default:{}});
 });
 Hooks.once('ready',()=>{
+ mountActorDirectoryLauncher(ui.actors);
  game.v20VampireNPC={open:openEditor,create:createVampireNPC,importFile:()=>pickJSON(async s=>{const actor=await createVampireNPC(s);ui.notifications.info('Imported Vampire NPC: '+actor.name);}),exportActor:async actor=>{const s=blueprintFromActor(actor);globalThis.V20NPC.download(s,actor.name.replace(/[^a-z0-9-]+/gi,'-')+'.v20-npc.json');},loadActor:actor=>openEditor(blueprintFromActor(actor),actor.img)};
  console.info(ID+' | Ready. Run game.v20VampireNPC.open()');
 });
