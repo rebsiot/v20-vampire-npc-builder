@@ -1,4 +1,4 @@
-# V20 Quick Vampire NPC Builder v0.1.5
+# WoD20 — V20 Vampire NPC Builder (v0.1.7)
 
 **Separate from Mage Charamancer.** No Mage module changes or dependencies.
 
@@ -14,9 +14,9 @@
 
 1. Shut down the world or disable the module while updating it.
 2. Extract the `v20-vampire-npc-builder` folder into Foundry `Data/modules/`.
-3. Enable **V20 Quick Vampire NPC Builder** in Manage Modules for the world.
+3. Enable **WoD20 — V20 Vampire NPC Builder** in Manage Modules for the world.
 4. Reload the world as a GM.
-5. Select the **Actors sidebar** toolbar. Click the blood-drop **Quick Vampire NPC** button.
+5. Open the **Actors** sidebar, then click **Create Vampire NPC** (GM only).
 
 ## Build directly in Foundry
 
@@ -91,7 +91,7 @@ The Foundry builder now has a **Portrait & Token (Optional)** section immediatel
 
 1. Back up `Z:\Data\modules\v20-vampire-npc-builder` and, for a full safety snapshot, the relevant Foundry world data and portrait/token asset folders.
 2. Stop Foundry, replace the complete `Z:\Data\modules\v20-vampire-npc-builder` folder with this release, restart Foundry, and enable/update **Tokenizer 2** in the intended world if you want automatic tokens.
-3. Hard-refresh the Foundry client. Open the **Actors sidebar** toolbar and use **Quick Vampire NPC**.
+3. Hard-refresh the Foundry client. Open the **Actors** sidebar and click **Create Vampire NPC**.
 4. For rollback, stop Foundry and restore the backup of v0.1.4 or its complete ZIP. Actor creations and uploaded/generated images are world/data changes, **not** automatically reverted by restoring the code. No schema migration is introduced by v0.1.5.
 
 ### Recommended live smoke test

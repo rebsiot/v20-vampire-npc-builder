@@ -1,66 +1,60 @@
-# V20 Quick Vampire NPC Builder
+# WoD20 — V20 Vampire NPC Builder
 
-An **unofficial, AI-assisted** Foundry VTT module for quickly creating Vampire: The Masquerade 20th Anniversary Edition NPCs on native World of Darkness 20th (WoD20) Actors. Built for a private St. Louis campaign.
+Build a **Vampire: The Masquerade 20th Anniversary Edition** NPC by choosing a Clan, setting dot ratings for Attributes, Abilities, Disciplines and Backgrounds, and creating a native WoD20 Actor. The GM can open the resulting Actor in the system's Vampire character sheet.
 
-> **Project and release warning:** This software is experimental and supplied **as-is, without warranty, guaranteed functionality, or support commitment**. This is a fan-made utility, **not an official World of Darkness, Vampire: The Masquerade, Foundry VTT, WoD20, or Tokenizer 2 product**. See [License](LICENSE.md) and [Third-Party Content and Rights](THIRD-PARTY-CONTENT.md) before using or redistributing anything.
+![Example of the Vampire NPC dot editor, captured in a simulated browser environment](images/v20-builder-preview.webp)
 
-## Publication and licensing
+*Editor preview from a sanitized mock; the surrounding Foundry UI and theme may differ. No private campaign artwork is included.*
 
-- **Proprietary, personal non-commercial use only.** This is **not open-source software**. The original software may be downloaded and used for a personal, non-commercial Foundry game under [LICENSE.md](LICENSE.md). Republishing, distributing copies or modified builds, commercial use, or bundling it with another product requires the copyright holder's prior written permission.
-- A **public GitHub repository** permits viewing and on-platform forking under GitHub's terms; it does not grant broader redistribution rights. Separate third-party licenses still apply.
-- **AI-assisted development:** substantial portions of this utility were developed with AI assistance and reviewed/tested with automated tools. Do not interpret repository publication or mock tests as a guarantee of compatibility.
-- **No licensed game content, portraits, tokens, or paid assets are provided.** You must independently obtain Foundry, the compatible WoD20 system, and any artwork or third-party modules you choose to use.
-- The World of Darkness and Vampire intellectual property belongs to its rights holders. See [Third-Party Content and Rights](THIRD-PARTY-CONTENT.md), including the official Dark Pack policy. Nothing here implies endorsement or a sublicense to game content.
+## What you can do
+
+- Create a new Vampire NPC directly on the native WoD20 sheet using the GM-only **Create Vampire NPC** button in the **Actors** sidebar.
+- Select Clan, Sect, Generation and concept; set trait dots without a character-creation budget or XP enforcement.
+- Add optional custom traits, Backgrounds and Discipline ratings. Individual Discipline powers and effects still require their own Items where applicable.
+- Optionally select or upload a portrait. With **Tokenizer 2** enabled, automatically generate a prototype token or open its editor for framing and pop-out effects.
+- Save local NPC drafts, export or import a V20 NPC blueprint JSON, and print/download a character-sheet PDF.
 
 ## Requirements
 
-- Foundry Virtual Tabletop **v14**.
-- **World of Darkness 20th Edition** system (`worldofdarkness`) **v7.3.1 or later**, including the system's modern Vampire PC/Splat template; live compatibility beyond the tested/mocked paths is not guaranteed.
-- GM permissions to create Actors and upload artwork.
-- **Optional:** MrPrimate's **Tokenizer 2** (`tokenizer-2`) enabled in the same world. The legacy Tokenizer is not used by the v0.1.5 integration.
+- **Foundry Virtual Tabletop v14**.
+- **World of Darkness 20th Edition** game system (`worldofdarkness`), minimum declared version **7.3.1**. This is a WoD20-specific module, not a generic Foundry NPC builder.
+- A **GM account** in the world. The module creates a new native Actor rather than modifying an existing one.
+- **Optional:** MrPrimate's **Tokenizer 2**, installed and enabled in the world for automatic token generation and editing. The older Tokenizer is not the integration target.
 
-## Open the builder in Foundry
+## Install or update
 
-As a GM, open the **Actors** sidebar and click **Create Vampire NPC**. This opens the existing editor; it does not create an Actor until **Create Foundry Actor** is selected. The earlier blood-drop button under Token Controls was removed in v0.1.6. After upgrading, hard-refresh the Foundry client to load the latest code.
-
-## NPC building
-
-- Fill in an NPC's identity, clan, sect, generation, Attributes, Abilities, Backgrounds, Virtues, Disciplines, and other traits using dot controls.
-- Create a **new** WoD20 Actor from the configured Vampire template. The builder does not overwrite an existing Actor.
-- A portrait is **optional**. With artwork selected, it can assign the Actor portrait and invoke Tokenizer 2 to create a Prototype Token. Tokenizer 2's editor can be used for centering, framing and pop-out effects. If Tokenizer 2 is absent or tokenization fails, NPC creation can continue.
-- Supports the module's V20 NPC blueprint JSON workflow, print/PDF output, and draft save/load. The browser companion is a separate application; its saves are browser-local, not server backups.
-
-## Safety and limitations
-
-**Back up your Foundry world and the existing module before upgrading.** Back up artwork and generated token files separately: reverting the module's code does not undo new Actors, uploaded portraits or generated tokens.
-
-- Portrait selection is not mandatory; token editing is optional. Tokens already placed on Scenes are not automatically updated when an Actor's Prototype Token changes.
-- Native Discipline **ratings** are populated; named Discipline powers, rituals and effects may still require normal Foundry Item setup.
-- The interchange format is a **V20 NPC blueprint**, not a native Actor export or a Mage Charamancer file. Do not publish your private NPC/Actor exports, campaign notes or players' data in issues, pull requests or releases.
-- Keep any files and images created from third-party artwork private unless the rights holder authorizes redistribution.
-- Verify the resulting Actor sheet, Clan, Disciplines, blood pool, portraits, and tokens in a test world before relying on them in a campaign.
-
-## Current repository and testing status
-
-**Latest built and published version: v0.1.6 (2026-10-15).** The user confirmed the portrait selector in v0.1.5 appeared after a hard refresh. v0.1.6 only relocates the GM launcher to the Actors sidebar; portrait/Tokenizer 2 code remains unchanged. Node and Chromium mock checks passed, but the new sidebar button and full Tokenizer 2 workflows have **not yet been verified in the live Foundry world**.
-
-**GitHub release v0.1.6 is published.** The repository contains the complete module source and an automated release workflow. The tagged release includes a Foundry-installable ZIP and a manifest, but live Foundry/Tokenizer 2 verification remains pending.
-
-**Install from Foundry:** Open **Setup → Add-on Modules → Install Module**, paste the following into **Manifest URL**, then click **Install**:
+In **Foundry Setup → Add-on Modules → Install Module**, paste this stable manifest URL into **Manifest URL**:
 
 `https://github.com/rebsiot/v20-vampire-npc-builder/releases/latest/download/module.json`
 
-The versioned [v0.1.6 release](https://github.com/rebsiot/v20-vampire-npc-builder/releases/tag/v0.1.6) also contains `v20-vampire-npc-builder.zip`. Enable this module in the world, and enable Tokenizer 2 if you want optional automatic tokens. Back up your world, module folder and artwork first. This GitHub distribution check does not constitute a live Foundry installation test.
+Back up the existing module directory and Foundry world before updating. Install or update the module, enable **WoD20 — V20 Vampire NPC Builder** in the intended world's **Manage Modules**, then reload the world and **hard-refresh the browser**. Existing modules may still show the old name until the update and client refresh complete.
 
-**Automatic releases:** Changes to module source or the packaging workflow trigger validation and a new GitHub Release only when `module.json` has an unused version number. An existing release tag is not overwritten.
+For manual installation, put the complete ZIP contents in `Data/modules/v20-vampire-npc-builder/` with `module.json` directly in that directory, not an extra nested folder. See [upgrade and rollback instructions](docs/UPGRADING.md).
 
-## Third parties, support and rights
+## Make your first NPC
 
-- [Software license: personal, non-commercial, no redistribution](LICENSE.md)
-- [Third-party rights, World of Darkness/Dark Pack, Tokenizer 2 and bundled libraries](THIRD-PARTY-CONTENT.md)
-- [Foundry VTT license and module-development documentation](https://foundryvtt.com/article/license/)
-- [World of Darkness Dark Pack Agreement](https://www.paradoxinteractive.com/games/world-of-darkness/community/dark-pack-agreement)
+1. Enter the world as GM, open the **Actors** sidebar, and select **Create Vampire NPC**.
+2. Enter **Example Ventrue**, select **Ventrue**, and set Generation **13**.
+3. Click dots for an Attribute (such as Charisma), an Ability (such as Leadership), and a Discipline (such as Dominate). This is a simple example, not an enforced allocation.
+4. Optionally use **Portrait & Token** to choose a portrait. You can skip the entire section.
+5. Click **Create Foundry Actor**, then open the new Actor from **Actors** and inspect its native sheet, dots and Discipline ratings.
 
-**No formal support or response-time commitment.** Issues and suggestions may be reviewed at the maintainer's discretion. Do not attach copyrighted game books, private campaign documents, credentials, or unlicensed artwork.
+**Checking whether it is enabled:** In that world's **Manage Modules**, search for **WoD20 — V20 Vampire NPC Builder** and check its enabled state. Installing a module in Setup does **not** automatically enable it in a world. This module cannot display the enabled status of every other module from GitHub.
 
-Copyright (c) 2026 rebsiot. All rights reserved in the original software, subject to the separately licensed third-party components and applicable law.
+## JSON and PDF scope
+
+**Export Foundry JSON** and **Import JSON** handle this tool's **V20 NPC blueprint format**, not a general Foundry Actor backup and not the Mage Character Tools format. The blueprint describes identity and NPC traits; portrait image bytes and Tokenizer layer files are not embedded. The module can load/export trait ratings from **Actors originally created by this builder** using its API. It does not promise lossless round trips for arbitrary existing Vampire Actors.
+
+For printable NPC information, use **V20 Sheet / PDF**; a fillable PDF option is also available. Read the [user guide](docs/USER-GUIDE.md) for detailed editing and JSON behavior.
+
+## Status and limitations
+
+**v0.1.7 — display-name update.** The Foundry module's visible title was made more recognizable in Manage Modules; the module ID, Actor generation and portrait code were not changed. Static/automated tests passed. The real **v0.1.7 module-manager title**, V20 trait-to-Actor data mapping, and full Tokenizer 2 token editing remain **unverified in the live campaign world**. A user previously confirmed that hard-refreshing v0.1.5 restored the portrait section; that is not a complete v0.1.7 integration test.
+
+The builder is experimental and is provided as-is, without warranty or support commitment. **Back up your world, installed module and uploaded/generated portrait files** before updating. Restoring old code cannot undo Actors or images created after the backup. See the [upgrade guide](docs/UPGRADING.md), [changelog](CHANGELOG.md), and [GitHub releases](https://github.com/rebsiot/v20-vampire-npc-builder/releases).
+
+## Rights and third-party software
+
+This is an **unofficial, AI-assisted, proprietary, personal non-commercial-use** fan utility. It is not endorsed by World of Darkness, Paradox Interactive, Foundry Gaming LLC, the WoD20 maintainers, or Tokenizer 2's developer. This repository does not grant rights to copyrighted rulebooks, artwork, tokens or other third-party content. Source availability does **not** grant permission to redistribute the software or modified copies beyond [the software license](LICENSE.md). The PDF library retains its own MIT license.
+
+See [LICENSE.md](LICENSE.md) and [THIRD-PARTY-CONTENT.md](THIRD-PARTY-CONTENT.md) for full restrictions, rights and attribution. Use [GitHub Issues](https://github.com/rebsiot/v20-vampire-npc-builder/issues) to report bugs, without sharing private characters, artwork or credentials. No formal support or response time is promised.
