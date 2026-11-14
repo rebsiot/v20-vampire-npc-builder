@@ -39,6 +39,8 @@ function smoke({isGM, systemId}) {
     PortraitWorkflow:class {constructor(){this.path='';} select(){}},
     createVampireNPC:async()=>{created++;},
     blueprintFromActor:()=>({}),
+    openRepairAudit:async()=>{},
+    openRepairRestore:async()=>{},
   };
   vm.runInNewContext(executable, vm.createContext(context), {filename:'scripts/main.js'});
   assert.equal(hooks.has('getSceneControlButtons'), false);
@@ -50,7 +52,8 @@ function smoke({isGM, systemId}) {
   const buttons=header.children.filter(x=>Object.hasOwn(x.dataset,'v20NpcLauncher'));
   if(isGM && systemId==='worldofdarkness'){
     assert.equal(buttons.length,1,'GM sees exactly one Create Vampire NPC button');
-    assert.equal(header.children.length,2,'Native Create Actor button remains intact');
+    assert.equal(header.children.length,3,'Native Create Actor button remains intact and maintenance is secondary');
+    assert.equal(header.children[2].children.length,2,'Audit and restore are available under maintenance');
     assert.equal(buttons[0].children[1].textContent,'Create Vampire NPC');
     buttons[0].listeners.click({preventDefault(){},stopPropagation(){}});
     assert.equal(opened,1,'Click opens editor');
