@@ -1,32 +1,27 @@
-# V20 NPC Builder v0.1.7 — test and release evidence
+# V20 NPC Builder v0.1.8 — candidate test and release evidence
 
-**Release scope:** Rename `module.json.title` for more reliable identification in Foundry's Manage Modules. No change to the module ID, Actor creation, JSON schema, Tokenizer 2 implementation, settings or user content. Public documentation/packaging updated under project standard 104.
+**Owner:** component 03, V20 Foundry NPC Builder
+**Verified source baseline:** GitHub v0.1.7, exact main commit `5fc0824de0afb86620a254b408386b135cf7f7d5`.
+**Candidate branch:** `fix/npc-derived-totals-audit-0.1.8`, PR #1.
+**Installed version:** Unknown; live source ZIP not provided.
+**VTT/system:** user confirmed Foundry 14, WoD20 7.3.2 in exported files; do not infer exact installed Builder version.
 
-## Source provenance
+## Mock/automated
+- Derived field audit test: a 3-dot Dexterity with stale total 1 detects total 3, plus soak and initiative; no Actor writes during audit.
+- Guarded restore test: identity checks, modified-field conflict checks, unmarked Actor rejection and active-effect safety.
+- Existing launcher regression adapted for GM-only secondary repair controls.
+- Syntax, manifest, complete installer layout and ZIP archive integrity are verified by nonpublishing PR workflow.
+- GitHub Actions successful candidate run: `43645746619`, commit `80b4858c5536202fef8f80087a7afd6cf6fcd6cb` (additional documentation changes require rerun).
+- Published software release: **NO**; no new stable manifest or tag has been issued.
 
-- Baseline: [GitHub v0.1.6](https://github.com/rebsiot/v20-vampire-npc-builder/releases/tag/v0.1.6), tag target `d887bbd31fe79fb9d8b1f2a596d320f8cadc7bd6`.
-- Locally available source ZIP: `v20-vampire-npc-builder-foundry-0.1.6.zip`; `module.json`, `scripts/main.js` and `styles/builder.css` Git blob hashes matched repository source at the release tag.
-- Exact final v0.1.7 GitHub source commit and release tag: *record only after publication is verified*.
-- Installed v0.1.7 in a user's live world: **not observed**.
+## Not tested live
+- New PC-type Vampire NPC creation/recalculation with native WoD20 7.3.2 and real Item bonuses.
+- Audit/preflight, backup download, repair, restoration, GM/non-GM permissions and multiple browser clients.
+- Native attack, soak, health and initiative after repairing Marianne in real Foundry.
+- Existing portrait/Tokenizer, custom Abilities and full template/blueprint round trip.
 
-## Automated checks
+## Installation/rollback
+Back up the live world and module directory. Candidate can be installed only after backup and user acceptance of pre-release status. Stop Foundry before manual replacement, restart, hard-refresh, run audit preview. Restore derived fields using the candidate UI and its exported JSON or restore world snapshot; then return to published v0.1.7 if needed. Older code cannot undo existing Actor edits.
 
-- Manifest: internal ID unchanged, new visible title, compatible system and version unchanged, stable manifest and pinned matching release ZIP URL.
-- Byte-for-byte regression: all previous JS, CSS, template and bundled PDF code from v0.1.6 unchanged.
-- Node syntax validation for the module JS.
-- Existing launcher mock test: only a GM with WoD20 gets one Actors-sidebar button, no duplicate, and opening it does not create an Actor.
-- New manifest smoke test and complete ZIP archive integrity/layout checks.
-- Screenshot: sanitized browser-mock preview from prior automated tests, **not** a claim of live Foundry display verification.
-
-## Live testing (pending)
-
-1. Update a test world to v0.1.7; open **Manage Modules** and verify the new title and enabled checkbox.
-2. As GM open **Actors → Create Vampire NPC**; verify portrait selection below Identity.
-3. Create an NPC with actual Attributes/Abilities/Disciplines, open the native WoD20 Actor sheet, confirm dot data, export its blueprint and import it back without losing ratings.
-4. If Tokenizer 2 is enabled, confirm the Actor portrait and Prototype Token can be generated and edited.
-
-## Upgrade / rollback
-
-Back up module folder, Foundry world and artwork separately; update via stable manifest, reload world and hard-refresh. Roll back to the tagged v0.1.6 ZIP and reload; reverting source will not undo any Actors or artwork created afterward. No migrations are included in this release.
-
-No v0.1.7 live test or deployment is claimed by these automated results.
+## Adjacent owner
+Combat Workflow (W17) may optionally classify PC-type Actors tagged with `flags.v20-vampire-npc-builder.npc` as NPCs for GM roll-review, in its own source/owner thread. No Combat Workflow or core WoD20 changes here.
