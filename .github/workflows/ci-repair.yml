@@ -2,12 +2,6 @@ name: V20 NPC Builder candidate verification
 
 on:
   pull_request:
-    paths:
-      - module.json
-      - scripts/**
-      - styles/**
-      - tests/**
-      - .github/workflows/ci-repair.yml
 
 permissions:
   contents: read
