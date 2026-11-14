@@ -1,3 +1,4 @@
+import {refreshCreatedNPC} from './repair.js';
 /* Foundry V14 / World of Darkness 20th 7.3.1 integration. */
 const ID='v20-vampire-npc-builder';
 const core=()=>globalThis.V20NPC;
@@ -113,6 +114,9 @@ export async function createVampireNPC(data){
   await installAdvantages(actor,s,splat);
   await installDisciplines(actor,s);
   await installFeatures(actor,s);
+  // PC-type NPCs do not run the legacy Actor total-recalculation hook.
+  // Recalculate only derived combat fields using the native WoD20 calculator.
+  await refreshCreatedNPC(actor);
   if(String(actor.system?.settings?.splat).toLowerCase()!=='vampire'||String(actor.system?.settings?.game).toLowerCase()!=='vampire')throw Error('System did not activate the Vampire sheet.');
   const missing=Object.entries(s.disciplines).filter(([k,n])=>n>0&&!actor.items.some(i=>i.type==='Power'&&norm(i.name)===norm(k)));
   if(missing.length)throw Error('Disciplines did not survive creation: '+missing.map(([k])=>k).join(', '));
