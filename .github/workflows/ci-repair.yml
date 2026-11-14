@@ -35,3 +35,9 @@ jobs:
           unzip -Z1 /tmp/v20-vampire-npc-builder.zip | grep -qx 'module.json'
           unzip -Z1 /tmp/v20-vampire-npc-builder.zip | grep -qx 'scripts/pdf-lib.min.js'
           unzip -Z1 /tmp/v20-vampire-npc-builder.zip | grep -qx 'scripts/repair.js'
+      - name: Retain complete candidate installer for test, not publication
+        uses: actions/upload-artifact@v4
+        with:
+          name: v20-vampire-npc-builder-0.1.8-candidate
+          path: /tmp/v20-vampire-npc-builder.zip
+          retention-days: 14
