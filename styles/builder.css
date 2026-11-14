@@ -92,3 +92,13 @@ body.theme-light .v20-field input,body.theme-light .v20-field select,body.theme-
 /* v0.1.6 — unobtrusive GM-only NPC creation action in the Actors sidebar. */
 .v20-npc-directory-launcher { display:flex; align-items:center; justify-content:center; gap:0.4rem; box-sizing:border-box; width:100%; min-height:2rem; margin:0.3rem 0 0; cursor:pointer; }
 .v20-npc-directory-launcher i { flex-shrink:0; }
+
+/* Secondary, GM-only maintenance controls below the primary Actors launcher. */
+.v20-npc-maintenance { display:flex; gap:0.3rem; flex-wrap:wrap; margin:0.25rem 0; }
+.v20-npc-maintenance-link { flex:1 1 12rem; font-size:0.78rem; min-height:1.55rem; opacity:0.85; }
+.v20-repair-audit { max-height:60vh; overflow-y:auto; }
+.v20-repair-row { margin:0.5rem 0; border-bottom:1px solid var(--color-border-light-tertiary,#888); padding:0.4rem; }
+.v20-repair-row details { margin-left:1rem; }
+.v20-repair-row code { white-space:normal; overflow-wrap:anywhere; }
+.v20-repair-warning { font-weight:600; }
+.v20-repair-ack { display:flex; align-items:center; gap:0.5rem; }

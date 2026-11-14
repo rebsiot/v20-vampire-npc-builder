@@ -14,11 +14,17 @@ Build a **Vampire: The Masquerade 20th Anniversary Edition** NPC by choosing a C
 - Optionally select or upload a portrait. With **Tokenizer 2** enabled, automatically generate a prototype token or open its editor for framing and pop-out effects.
 - Save local NPC drafts, export or import a V20 NPC blueprint JSON, and print/download a character-sheet PDF.
 
+## Existing Vampire NPC combat statistics
+
+The GM Actors sidebar also provides a secondary **Audit existing Vampire NPC combat stats** action. It reviews characters created by this Builder and previews incorrect calculated Attribute totals, soak and initiative. Select the NPCs to repair, save the offered complete JSON backup, and explicitly confirm before changes are written to those Actors. There is no automatic migration or blanket import. A secondary **Restore derived stats from a repair backup** action previews and safeguards restoration. See [repair notes](REPAIR-NOTES-v0.1.8.md).
+
+**v0.1.8 candidate only:** The audit and repair are mock-tested, not live-verified in a real Foundry world. The latest stable release remains v0.1.7 until an actual release is verified.
+
 ## Requirements
 
 - **Foundry Virtual Tabletop v14**.
 - **World of Darkness 20th Edition** game system (`worldofdarkness`), minimum declared version **7.3.1**. This is a WoD20-specific module, not a generic Foundry NPC builder.
-- A **GM account** in the world. The module creates a new native Actor rather than modifying an existing one.
+- A **GM account** in the world. New-NPC creation makes a native Actor. The separate opt-in audit can correct calculated fields on explicitly selected existing Builder NPCs.
 - **Optional:** MrPrimate's **Tokenizer 2**, installed and enabled in the world for automatic token generation and editing. The older Tokenizer is not the integration target.
 
 ## Install or update
@@ -49,7 +55,7 @@ For printable NPC information, use **V20 Sheet / PDF**; a fillable PDF option is
 
 ## Status and limitations
 
-**v0.1.7 — display-name update.** The Foundry module's visible title was made more recognizable in Manage Modules; the module ID, Actor generation and portrait code were not changed. Static/automated tests passed. The real **v0.1.7 module-manager title**, V20 trait-to-Actor data mapping, and full Tokenizer 2 token editing remain **unverified in the live campaign world**. A user previously confirmed that hard-refreshing v0.1.5 restored the portrait section; that is not a complete v0.1.7 integration test.
+**v0.1.8 candidate — calculated combat totals and opt-in repair.** v0.1.7 was a display-name update. The module ID and portrait code are preserved. The new creation flow calculates native derived combat values, with a separate GM-reviewed correction path for existing NPCs. Static/automated tests passed. The real **v0.1.7 module-manager title**, V20 trait-to-Actor data mapping, and full Tokenizer 2 token editing remain **unverified in the live campaign world**. A user previously confirmed that hard-refreshing v0.1.5 restored the portrait section; that is not a complete v0.1.7 integration test.
 
 The builder is experimental and is provided as-is, without warranty or support commitment. **Back up your world, installed module and uploaded/generated portrait files** before updating. Restoring old code cannot undo Actors or images created after the backup. See the [upgrade guide](docs/UPGRADING.md), [changelog](CHANGELOG.md), and [GitHub releases](https://github.com/rebsiot/v20-vampire-npc-builder/releases).
 

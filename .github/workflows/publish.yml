@@ -32,6 +32,7 @@ jobs:
           set -euo pipefail
           node --version
           node --check scripts/actor.js
+          node --check scripts/repair.js
           node --check scripts/core.js
           node --check scripts/fillable.js
           node --check scripts/main.js
@@ -39,6 +40,7 @@ jobs:
           node --check scripts/sheet.js
           node --check scripts/pdf-lib.min.js
           node tests/launcher-smoke.cjs
+          node tests/repair-mock.cjs
           node tests/manifest-smoke.cjs
           node tests/launcher-smoke.cjs
           node - <<'NODE'
@@ -49,7 +51,7 @@ jobs:
           const repo = 'https://github.com/rebsiot/v20-vampire-npc-builder';
           if (m.manifest !== `${repo}/releases/latest/download/module.json`) throw Error('Unexpected manifest URL');
           if (m.download !== `${repo}/releases/download/v${m.version}/v20-vampire-npc-builder.zip`) throw Error('Unexpected version-specific ZIP URL');
-          for (const file of [...m.esmodules, ...m.scripts, ...m.styles, 'scripts/pdf-lib-LICENSE.md', 'LICENSE.md', 'THIRD-PARTY-CONTENT.md', 'templates/editor.hbs', 'CHANGELOG.md', 'images/v20-builder-preview.webp', 'docs/UPGRADING.md', 'tests/manifest-smoke.cjs']) {
+          for (const file of [...m.esmodules, ...m.scripts, ...m.styles, 'scripts/pdf-lib-LICENSE.md', 'LICENSE.md', 'THIRD-PARTY-CONTENT.md', 'templates/editor.hbs', 'CHANGELOG.md', 'images/v20-builder-preview.webp', 'docs/UPGRADING.md', 'REPAIR-NOTES-v0.1.8.md', 'scripts/repair.js', 'tests/repair-mock.cjs', 'tests/manifest-smoke.cjs']) {
             if (!fs.existsSync(file)) throw Error(`Missing packaged file: ${file}`);
           }
           if (fs.statSync('scripts/pdf-lib.min.js').size < 400000) throw Error('PDF library is missing or truncated');
@@ -70,7 +72,7 @@ jobs:
           mkdir -p dist
           zip -q -r dist/v20-vampire-npc-builder.zip \
             module.json scripts styles templates README.md LICENSE.md THIRD-PARTY-CONTENT.md \
-            RELEASE-NOTES.txt TEST-REPORT.md docs tests CHANGELOG.md images
+            RELEASE-NOTES.txt REPAIR-NOTES-v0.1.8.md TEST-REPORT.md docs tests CHANGELOG.md images
           cp module.json dist/module.json
           unzip -tq dist/v20-vampire-npc-builder.zip
           unzip -Z1 dist/v20-vampire-npc-builder.zip | grep -qx 'module.json'

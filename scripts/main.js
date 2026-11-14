@@ -3,6 +3,7 @@ import './fillable.js';
 import './sheet.js';
 import {createVampireNPC,blueprintFromActor} from './actor.js';
 import {PortraitWorkflow} from './portrait.js';
+import {openRepairAudit,openRepairRestore} from './repair.js';
 const ID='v20-vampire-npc-builder';
 const {ApplicationV2,HandlebarsApplicationMixin}=foundry.applications.api;
 let active=null;
@@ -89,6 +90,21 @@ function mountActorDirectoryLauncher(app, html) {
  button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();openEditor();});
  // Keep native Create Actor/Create Folder controls intact; this is a separate row.
  header.append(button);
+ // Maintenance controls are secondary to the existing Create Vampire NPC action.
+ const maintenance=document.createElement('div');
+ maintenance.className='v20-npc-maintenance';
+ for (const [title,handler] of [
+   ['Audit existing Vampire NPC combat stats',openRepairAudit],
+   ['Restore derived stats from a repair backup',openRepairRestore]
+ ]) {
+   const link=document.createElement('button');
+   link.type='button';
+   link.className='v20-npc-maintenance-link';
+   link.textContent=title;
+   link.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();void handler();});
+   maintenance.append(link);
+ }
+ header.append(maintenance);
 }
 Hooks.on('renderActorDirectory',mountActorDirectoryLauncher);
 Hooks.once('init',()=>{
@@ -98,6 +114,6 @@ Hooks.once('init',()=>{
 });
 Hooks.once('ready',()=>{
  mountActorDirectoryLauncher(ui.actors);
- game.v20VampireNPC={open:openEditor,create:createVampireNPC,importFile:()=>pickJSON(async s=>{const actor=await createVampireNPC(s);ui.notifications.info('Imported Vampire NPC: '+actor.name);}),exportActor:async actor=>{const s=blueprintFromActor(actor);globalThis.V20NPC.download(s,actor.name.replace(/[^a-z0-9-]+/gi,'-')+'.v20-npc.json');},loadActor:actor=>openEditor(blueprintFromActor(actor),actor.img)};
+ game.v20VampireNPC={open:openEditor,create:createVampireNPC,importFile:()=>pickJSON(async s=>{const actor=await createVampireNPC(s);ui.notifications.info('Imported Vampire NPC: '+actor.name);}),exportActor:async actor=>{const s=blueprintFromActor(actor);globalThis.V20NPC.download(s,actor.name.replace(/[^a-z0-9-]+/gi,'-')+'.v20-npc.json');},loadActor:actor=>openEditor(blueprintFromActor(actor),actor.img),auditExisting:openRepairAudit,restoreRepairBackup:openRepairRestore};
  console.info(ID+' | Ready. Run game.v20VampireNPC.open()');
 });

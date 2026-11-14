@@ -15,8 +15,8 @@ assert.equal(m.download, `${repo}/releases/download/v${m.version}/v20-vampire-np
 for (const file of [...m.esmodules, ...m.scripts, ...m.styles,
   'templates/editor.hbs','scripts/pdf-lib-LICENSE.md','LICENSE.md',
   'THIRD-PARTY-CONTENT.md','CHANGELOG.md','docs/UPGRADING.md',
-  'images/v20-builder-preview.webp']) {
+  'images/v20-builder-preview.webp','scripts/repair.js','tests/repair-mock.cjs']) {
   assert.ok(fs.existsSync(path.join(root, file)), `Required packaged file missing: ${file}`);
 }
 assert.ok(fs.statSync(path.join(root, 'scripts/pdf-lib.min.js')).size > 400000);
-console.log('PASS: title visible, ID unchanged, v0.1.7 manifest/download consistent, rights and required files present.');
+console.log('PASS: title visible, ID unchanged, versioned manifest/download consistent, rights and required files present.');

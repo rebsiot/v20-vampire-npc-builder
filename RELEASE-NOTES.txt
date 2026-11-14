@@ -1,17 +1,20 @@
-WoD20 — V20 Vampire NPC Builder v0.1.7 — Easier to find in Manage Modules
+WoD20 — V20 Vampire NPC Builder v0.1.8 — Correct derived combat totals
 
-The module now appears as “WoD20 — V20 Vampire NPC Builder” in Foundry's module list. Only the display title and release/documentation files changed; NPC creation, saved Actors, optional portraits, Tokenizer 2 behavior and the module ID are unchanged.
+New Builder NPCs now have native WoD20 Attribute totals, soak and initiative calculated after creation. Existing Builder NPCs can be reviewed through the GM Actors sidebar's Audit existing Vampire NPC combat stats link.
 
-Before updating
-- Back up your Foundry world, installed module and uploaded/generated artwork.
-- Update through the existing manifest, enable it in the intended world, restart/reload the world and hard-refresh your browser. Module settings and Actor data are not migrated.
+The audit previews only proposed derived-value changes; you choose Actors, receive a complete JSON backup, and explicitly confirm before any repair. A separate Restore derived stats control previews the rollback and skips conflicts. No automatic migration occurs. Base ratings, Actors' IDs, Items, notes, existing wounds, artwork and completed rolls are preserved.
+
+Before updating or repairing
+- Back up the Foundry world, module folder and separately stored artwork.
+- Install the complete ZIP, restart the world and hard-refresh browser clients (Shift+F5).
+- Run the audit; confirm the downloaded JSON is saved before repairing selected Actors.
 
 Known limitations
-- v0.1.7 module-manager presentation and full WoD20 Actor/Discipline round trips remain unverified in a live Foundry v14 world. Automated and mocked tests are not equivalent to live validation.
-- Tokenizer 2 is optional and has not been fully verified live with this release.
-- The module is unofficial, experimental and supplied as-is; see the included license and third-party notices.
+- Foundry v14 / WoD20 7.3.2 live test and two-client workflows pending. No claim of live deployment.
+- Actors with active effects are skipped. Unmarked Actors and non-Vampire NPCs are not scanned.
+- This version does not alter Combat Workflow's separate detection of PC-type NPCs.
+- Reverting module code alone does not undo prior Actor repairs or historical combat.
 
-Install / update manifest:
-https://github.com/rebsiot/v20-vampire-npc-builder/releases/latest/download/module.json
-
-Changelog and rollback information: CHANGELOG.md and docs/UPGRADING.md in the release ZIP.
+Rollback: use the restore option with its matching backup before reverting to v0.1.7, or restore a matching world snapshot.
+Manifest (after publication only): https://github.com/rebsiot/v20-vampire-npc-builder/releases/latest/download/module.json
+Full technical and testing details: REPAIR-NOTES-v0.1.8.md and TEST-REPORT.md.
